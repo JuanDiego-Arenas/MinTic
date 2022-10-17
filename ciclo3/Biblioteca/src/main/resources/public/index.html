@@ -2,31 +2,46 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
     <script src="funciones.js"></script>
     <title>Prueba http</title>
 </head>
 <body>
-    <h1>Probando servicios con Ajax </h1>
-    <button onclick="listarLibros()">Consultar Todos</button>
-    <hr>
-    <input type="text" id="busautor">
-    <button onclick="buscarAutor()">Consultar Autor</button>
-    <hr>
-    <div id = "tabla"></div>
-    <hr>
-    <div>
-        <input type = "text" id = "isbn">
-        <button onclick = "consultarLibro()">Consultar Libro</button>
+    <div class = "container unauthenticated">
+        <a href="/oauth2/authorization/github">Iniciar Sesión</a>
     </div>
-    <hr>
-    <div id="libro"></div>
-    <hr>
-    <input type = "text" id = "isbn_insert" placeholder = "Isbn00">
-    <input type = "text" id = "titulo" placeholder = "Titulo">
-    <input type = "text" id = "autor" placeholder = "Autor">
-    <input type = "text" id = "editorial" placeholder = "Editorial">
-    <input type = "text" id = "paginas" min = "10">
-    <button onclick = "guardarLibro()">Guardar</button>
+    <div class = "container authenticated">
+        Usuario:<samp id = "usuario"></samp>
+        <h1>Probando servicios con Ajax </h1>
+        <button onclick="listarLibros()">Consultar Todos</button>
+        <hr>
+        <input type="text" id="busautor">
+        <button onclick="buscarAutor()">Consultar Autor</button>
+        <hr>
+        <div id = "tabla"></div>
+        <hr>
+        <div>
+            <input type = "text" id = "isbn">
+            <button onclick = "consultarLibro()">Consultar Libro</button>
+        </div>
+        <hr>
+        <div id="libro"></div>
+        <hr>
+        <input type = "text" id = "isbn_insert" placeholder = "Isbn00">
+        <input type = "text" id = "titulo" placeholder = "Titulo">
+        <input type = "text" id = "autor" placeholder = "Autor">
+        <input type = "text" id = "editorial" placeholder = "Editorial">
+        <input type = "text" id = "paginas" min = "10">
+        <button onclick = "guardarLibro()">Guardar</button>
+        <button onclick = "actualizarLibro()">Actualizar</button>
+    </div>
 </body>
+<script type = "text/javascript">
+    $.get("/user",function(data){
+        $("#usuario").html(data.name);
+        $(".unauthenticated").hide();
+        $(".authenticated").show();
+    });
+</script>
 </html>
